@@ -1,0 +1,2 @@
+Premièrement j'ai conçu une architecture de l'interface graphique pour une meilleure modularité pour ma conception.
+À continuer.
