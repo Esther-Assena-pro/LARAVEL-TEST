@@ -20,7 +20,7 @@ class PropertySeeder extends Seeder
         ]);
         Property::create([
             'name' => 'Cozy Appartement',
-            'description' => 'Un appartement meublé avec une ambiance tropical.',
+            'description' => 'Un appartement meublé de luxe.',
             'price_per_night' => 100.00,
         ]);
     }

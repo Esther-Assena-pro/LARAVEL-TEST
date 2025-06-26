@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.dark .flatpickr-calendar {
+    background-color: #1f2937;
+    color: #d1d5db;
+}
+
+.dark .flatpickr-day {
+    color: #d1d5db;
+}
+
+.dark .flatpickr-day:hover,
+.dark .flatpickr-day:focus {
+    background-color: #3b82f6;
+    color: #ffffff;
+}
+
+.dark .flatpickr-day.selected {
+    background-color: #1d4ed8;
+    color: #ffffff;
+}

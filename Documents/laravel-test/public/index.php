@@ -1,5 +1,5 @@
 <?php
-
+ini_set('memory_limit', '1G');
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
