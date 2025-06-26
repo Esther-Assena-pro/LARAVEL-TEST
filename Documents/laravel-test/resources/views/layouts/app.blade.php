@@ -25,7 +25,7 @@
                         @endauth
                     </div>
                     <div class="flex items-center space-x-4">
-                        <button id="darkModeToggle" class="text-gray-500 dark:text-gray-400 hover:text-joy focus:outline-none" onclick="toggleDarkMode()">
+                        <button id="darkModeToggle" class="text-gray-500 dark:text-gray-400 hover:text-joy focus:outline-none">
                             <span class="sr-only">{{ __('Basculer le thème') }}</span>
                             <svg id="moon-icon" class="w-6 h-6 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -75,7 +75,7 @@
                             </div>
                         @else
                             <a href="{{ route('login') }}" class="text-gray-700 dark:text-gray-300 hover:text-joy font-medium px-3 py-2 rounded-md">{{ __('Connexion') }}</a>
-                            <a href="{{ route('register') }}" class="bg-joy text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-200">{{ __('Inscription') }}</a>
+                            <a href="{{ route('register') }}" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200">{{ __('Inscription') }}</a>
                         @endauth
                     </div>
                 </div>
@@ -100,41 +100,6 @@
         @endif
 
         @livewireScripts
-        <script>
-            function toggleDarkMode() {
-                document.documentElement.classList.toggle('dark');
-                localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-                document.getElementById('moon-icon').classList.toggle('hidden');
-                document.getElementById('sun-icon').classList.toggle('hidden');
-            }
-
-// Initialisation de Flatpickr uniquement pour la gestion de minDate
-            document.addEventListener('DOMContentLoaded', () => {
-                flatpickr(".datepicker", {
-                    minDate: "today",
-                    dateFormat: "Y-m-d",
-                    locale: 'fr',
-                    onChange: function(selectedDates, dateStr, instance) {
-                        const startDateInput = document.getElementById('start-date');
-                        const endDateInput = document.getElementById('end-date');
-                        if (instance.element.id === 'start-date' && selectedDates.length > 0) {
-                            endDateInput._flatpickr.set('minDate', dateStr);
-                        }
-                    }
-                });
-
-// Vérification initiale du thème
-                if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                    document.getElementById('moon-icon').classList.remove('hidden');
-                    document.getElementById('sun-icon').classList.add('hidden');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    document.getElementById('moon-icon').classList.add('hidden');
-                    document.getElementById('sun-icon').classList.remove('hidden');
-                }
-            });
-        </script>
         @stack('scripts')
     </div>
 </body>

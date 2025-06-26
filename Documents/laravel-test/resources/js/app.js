@@ -1,8 +1,8 @@
 import './bootstrap';
-import flatpickr from './flatpickr';
+import flatpickr from 'flatpickr';
+import { French } from 'flatpickr/dist/l10n/fr.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-   
     const darkModeToggle = document.getElementById('darkModeToggle');
     const moonIcon = document.getElementById('moon-icon');
     const sunIcon = document.getElementById('sun-icon');
@@ -13,39 +13,39 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+// Initialisation du thème
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    if (savedTheme === 'dark') {
-        html.classList.add('dark');
-        moonIcon.classList.remove('hidden');
-        sunIcon.classList.add('hidden');
-    } else {
-        html.classList.remove('dark');
-        moonIcon.classList.add('hidden');
-        sunIcon.classList.remove('hidden');
-    }
+    const isDark = savedTheme === 'dark';
+    html.classList.toggle('dark', isDark);
+    moonIcon.classList.toggle('hidden', !isDark);
+    sunIcon.classList.toggle('hidden', isDark);
 
+// gerer le toggle
     darkModeToggle.addEventListener('click', () => {
         const isDark = html.classList.toggle('dark');
         moonIcon.classList.toggle('hidden', !isDark);
         sunIcon.classList.toggle('hidden', isDark);
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        console.log('Theme toggled to:', isDark ? 'dark' : 'light'); 
     });
 
- // Initialisation de Flatpickr
+    
     flatpickr('.datepicker', {
         dateFormat: 'Y-m-d',
         minDate: 'today',
-        locale: 'fr',
+        locale: French,
         onChange: function(selectedDates, dateStr, instance) {
             const startDateInput = document.getElementById('start-date');
             const endDateInput = document.getElementById('end-date');
             if (instance.element.id === 'start-date' && selectedDates.length > 0) {
-                endDateInput._flatpickr.set('minDate', dateStr);
+                if (endDateInput && endDateInput._flatpickr) {
+                    endDateInput._flatpickr.set('minDate', dateStr);
+                }
             }
         }
     });
 
-    // Gestion du formulaire de réservation
+// Gestion du formulaire de réservation
     const form = document.querySelector('#booking-form');
     if (form) {
         form.addEventListener('submit', (e) => {
@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).then(response => response.json()).then(data => {
                     console.log('Réponse du serveur (store):', data);
                     resultDiv.textContent = data.message || 'Erreur inconnue';
-                    
                     if (data.total_price) {
                         totalPriceSpan.textContent = `${data.total_price || 0} €`;
                     }
@@ -83,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Gestion de la suppression
     document.querySelectorAll('[id^="delete-form-"]').forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();

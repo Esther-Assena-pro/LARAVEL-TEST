@@ -31,7 +31,7 @@
                 <ul class="space-y-2 text-sm">
                     <li>Email: <a href="mailto:contact@innovgestbooking.com" class="text-gray-400 hover:text-blue-400">contact@innovgestbooking.com</a></li>
                     <li>Téléphone: <span class="text-gray-400">+33 1 23 45 67 89</span></li>
-                    <li>Adresse: <span class="text-gray-400">123 Rue de l'Innovation, 75001 Paris, France</span></li>
+                    <li>Adresse: <span class="text-gray-400">25 Rue Paul Xavier, 69007 Lyon, France</span></li>
                 </ul>
             </div>
         </div>

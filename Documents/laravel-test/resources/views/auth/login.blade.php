@@ -1,8 +1,7 @@
 <x-guest-layout>
   
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <!-- logo  -->
+<!-- logo  -->
     <div class="text-center mb-6">
         <img src="{{ asset('images/logo.png') }}" alt="Logo InnovGest" class="mx-auto h-20">
         <h2 class="text-2xl font-bold text-gray-900 mt-2">InnovGest</h2>
@@ -25,7 +24,7 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- se souvenir de moi -->
+<!-- se souvenir de moi -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">

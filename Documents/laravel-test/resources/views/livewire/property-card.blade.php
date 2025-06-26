@@ -21,16 +21,22 @@
         <p class="text-gray-700 dark:text-gray-200 text-lg font-medium mb-4">{{ __('Prix par nuit') }}: <span class="text-blue-600 dark:text-blue-300">{{ isset($property) ? number_format($property->price_per_night ?? 0, 2) : '0.00' }} €</span></p>
         <div class="flex justify-between items-center">
             @if(isset($property) && $property->id)
-                <a href="{{ route('properties.show', ['id' => $property->id]) }}" class="text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 font-medium transition-colors duration-200">
-                    {{ __('Voir les détails') }}
-                </a>
-                <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 dark:hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1">
-                    {{ __('Réserver') }}
-                </a>
+                @auth
+                    <a href="{{ route('properties.show', ['id' => $property->id]) }}" class="text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 font-medium transition-colors duration-200">
+                        {{ __('Voir les détails') }}
+                    </a>
+                    <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50">
+                        {{ __('Réserver') }}
+                    </a>
+                @else
+                    <a href="{{ route('properties.show', ['id' => $property->id]) }}" class="text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-200 font-medium transition-colors duration-200">
+                        {{ __('Voir les détails') }}
+                    </a>
+                @endauth
             @else
                 <span class="text-gray-600 dark:text-gray-400">{{ __('Détails non disponibles') }}</span>
                 <span class="text-gray-600 dark:text-gray-400">{{ __('Réserver non disponible') }}</span>
             @endif
         </div>
-    </div>
+    </div>  
 </div>

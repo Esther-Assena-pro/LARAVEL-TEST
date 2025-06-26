@@ -13,6 +13,11 @@ class PropertyCard extends Component
         $this->property = $property;
     }
 
+    public function openBooking()
+    {
+        $this->emitTo('booking-manager', 'openModal', $this->property->id);
+    }
+
     public function render()
     {
         return view('livewire.property-card');
